@@ -5,6 +5,6 @@ public class Main {
         var obj = new PuzzleEngine();
         System.out.println("Hello world!");
         for (int i = 0; i < 5; ++i)
-            System.out.println(obj.getPuzzle());
+            System.out.println(obj.generatePuzzle(2, 3));
     }
 }
