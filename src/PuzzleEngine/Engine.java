@@ -46,11 +46,19 @@ public class Engine {
 
     private Puzzle parseMatrix() {
         // generate a hidden number for tomato placement
-        var hiddenNumber = generateRandomValue(0, 9);
+        var hiddenNumber = generateHiddenNumber();
 
         // send the matrix for parsing into the puzzle
         return new PuzzleParser(this.puzzleMatrix, this.operatorList, hiddenNumber)
                 .parse();
+    }
+
+    private int generateHiddenNumber() {
+        var numString = new StringBuilder();
+
+        matrixTracker.forEach(numString::append);
+        var ind = generateRandomValue(0, numString.length() - 1);
+        return Character.getNumericValue(numString.charAt(ind));
     }
 
     private int generateRandomValue(int min, int max) {

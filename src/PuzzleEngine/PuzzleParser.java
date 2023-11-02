@@ -3,7 +3,6 @@ package PuzzleEngine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PuzzleParser {
     private List<List<Integer>> puzzleMatrix;
@@ -29,9 +28,15 @@ public class PuzzleParser {
 
         for (var i = 0; i < rowCount; ++i) {
             var row = puzzleMatrix.get(i);
+            var operRow = operatorList.get(i);
             var rowPuzzle = new ArrayList<String>();
 
-            row.forEach(num -> rowPuzzle.add(hideNumber(num)));
+            for (var j = 0; j < colCount; ++j) {
+                rowPuzzle.add(hideNumber(row.get(j)));
+                var op = operRow.get(j) == Operator.Add ? "+" : "-";
+                if (op.equals("+") && i == 0) continue;
+                rowPuzzle.add(op);
+            }
 
             rowPuzzle.add("=");
             rowPuzzle.add(String.valueOf(rowSum[i]));
@@ -65,7 +70,7 @@ public class PuzzleParser {
             var list = puzzleMatrix.get(i);
             var operList = operatorList.get(i);
             var rowSum = 0;
-            for (var j = 0; j < colCount; ++i) {
+            for (var j = 0; j < colCount; ++j) {
                 var num = list.get(j);
                 var numSign = operList.get(j);
                 rowSum = numSign == Operator.Add ? rowSum + num : rowSum - num;
@@ -81,7 +86,7 @@ public class PuzzleParser {
 
         for (var i = 0; i < colCount; ++i) {
             var colSum = 0;
-            for (var j = 0; j < rowCount; ++i) {
+            for (var j = 0; j < rowCount; ++j) {
                 var list = puzzleMatrix.get(j);
                 var operList = operatorList.get(j);
 
