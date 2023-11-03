@@ -32,10 +32,10 @@ public class PuzzleParser {
             var rowPuzzle = new ArrayList<String>();
 
             for (var j = 0; j < colCount; ++j) {
-                rowPuzzle.add(hideNumber(row.get(j)));
                 var op = operRow.get(j) == Operator.Add ? "+" : "-";
-                if (op.equals("+") && i == 0) continue;
-                rowPuzzle.add(op);
+                if (!(op.equals("+") && j == 0))
+                    rowPuzzle.add(op);
+                rowPuzzle.add(hideNumber(row.get(j)));
             }
 
             rowPuzzle.add("=");
