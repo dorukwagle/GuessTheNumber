@@ -4,7 +4,7 @@ import PuzzleEngine.Puzzle;
 public class Main {
     public static void main(String[] args) {
         var obj = new Engine();
-        var puzzle = obj.generatePuzzle(2);
+        var puzzle = obj.generatePuzzle(3, 4);
         obj.reset();
         var puzzle2 = obj.generatePuzzle(3);
         printPuzzle(puzzle);
